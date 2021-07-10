@@ -15,10 +15,7 @@ public class GameControl : MonoBehaviour
 
     [Header("Errors")]
     public string CustomErrorException = "";
-    // add other data
-    // add other data
-    // add other data
-    // add other data
+    public string userName = "";
 
     // SINGLETON PATTERN FOR DDOL
     void Awake()
