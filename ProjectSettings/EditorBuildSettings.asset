@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00_Scenes/TT.unity
+    path: Assets/00_Scenes/SpaceNodes.unity
     guid: 46b64e7af1fea684b84e770dc0a84e77
   m_configObjects: {}

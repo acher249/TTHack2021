@@ -95,7 +95,6 @@ namespace StickyNotes
                 mLocalizationThumbnail.texture = thumbnailTexture;
             };
 
-            // this is how to create an error panel prompt
             //GameControl.control.CustomErrorException = "BAD ERROR";
         }
 
