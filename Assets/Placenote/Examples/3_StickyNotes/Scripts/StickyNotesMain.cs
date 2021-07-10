@@ -36,7 +36,7 @@ namespace StickyNotes
 
         // Shop Stuff
         [Header("SHoP Inputs")]
-        public GameObject MapNamePanel_Shop;
+        public GameObject MapNameInputPanel;
 
         private bool mapQualityThresholdCrossed = false;
         private float minMapSize = 200;
@@ -327,7 +327,7 @@ namespace StickyNotes
                 LibPlacenote.Instance.StartSession();
 
                 //Adam turn this off
-                MapNamePanel_Shop.SetActive(false);
+                MapNameInputPanel.SetActive(false);
 
                 //also need to turn this back on
                 this.GetComponent<NotesManager>().enabled = true;

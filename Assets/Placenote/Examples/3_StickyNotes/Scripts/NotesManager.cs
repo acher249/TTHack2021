@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.ARFoundation;
+using System;
 
 // Classes to hold Notes information.
 
@@ -17,6 +18,9 @@ namespace StickyNotes
     [System.Serializable]
     public class NoteInfo
     {
+        // ajc adding additional metadata
+        public string noteID;
+
         public float px;
         public float py;
         public float pz;
@@ -48,6 +52,8 @@ namespace StickyNotes
 
         private GameObject mCurrNote;
         private NoteInfo mCurrNoteInfo;
+
+        private string newNoteID = "";
 
         [SerializeField] ARRaycastManager mRaycastManager;
 
@@ -175,7 +181,7 @@ namespace StickyNotes
             mCurrNote.GetComponent<NoteController>().mActiveButtons = false;
         }
 
-
+        // ajc
         public void InstantiateNote(Vector3 notePosition)
         {
             // Instantiate new note prefab and set transform.
@@ -202,8 +208,16 @@ namespace StickyNotes
             // Set new note as the current one.
             mCurrNote = note;
 
+            // ----------- USE THIS UNIQUE ID FOR NEW API -------------- //
+            // create noteID to give to the note, to tie placenote to our own API
+            // var newNoteID = mCurrNote.GetInstanceID().ToString();
+            // use this noteID
+            newNoteID = Guid.NewGuid().ToString();
+
             mCurrNoteInfo = new NoteInfo
             {
+                noteID = newNoteID,
+
                 px = note.transform.position.x,
                 py = note.transform.position.y,
                 pz = note.transform.position.z,
@@ -220,6 +234,7 @@ namespace StickyNotes
             note.GetComponent<NoteController>().mDeleteButton.onClick.AddListener(OnDeleteButtonClick);
             TurnOnButtons();
 
+            // send the user to edit the new note now that it is instantiated.
             EditCurrNote();
         }
 
@@ -227,14 +242,26 @@ namespace StickyNotes
         {
             Debug.Log("Editing selected note.");
 
+
+            // ajc instead of instantly activating this input field, we need a new form to enter information.
+            // turn on form panel dialogue
+
+            // use newNoteID global variable, make sure to clear it at the end, after editting and making the rest call
+
+
             // Activate input field
             InputField input = mCurrNote.GetComponentInChildren<InputField>();
             input.interactable = true;
             input.ActivateInputField();
 
+            // ajc Todo
+            // call OnNoteClosed from button click after entering all information into input field
+            // pass in all the note data, not the input field
+
             input.onEndEdit.AddListener(delegate { OnNoteClosed(input); });
         }
 
+        // don't just pass in the inputField, pass in more data.
         private void OnNoteClosed(InputField input)
         {
             Debug.Log("No longer editing current note!");
@@ -247,6 +274,7 @@ namespace StickyNotes
 
             //TurnOffButtons();
 
+            // ajc - not quite sure what is going on here yet
             int index = mCurrNote.GetComponent<NoteController>().mIndex;
             if (index < 0)
             {

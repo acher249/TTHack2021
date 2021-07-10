@@ -27,9 +27,9 @@ namespace spatialNotes
                 string URL = "https://ar-points.herokuapp.com/api/note/get-my-notes";
                 yield return StartCoroutine(GetRequest_SpatialNoteUtility(URL, (SpatialNoteRoot) =>
                 {
-                    //Debug.Log("notes object returned: ");
-                    //Debug.Log(SpatialNoteRoot);
-                    //LogObjectToConsole(SpatialNoteRoot);
+                    Debug.Log("notes object returned: ");
+                    Debug.Log(SpatialNoteRoot);
+                    LogObjectToConsole(SpatialNoteRoot);
 
                     //for (var i = 0; i < SpatialNoteRoot.Notes.Length; i++)
                     //{
