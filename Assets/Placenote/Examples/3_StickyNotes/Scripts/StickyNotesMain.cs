@@ -95,7 +95,8 @@ namespace StickyNotes
                 mLocalizationThumbnail.texture = thumbnailTexture;
             };
 
-            GameControl.control.CustomErrorException = "BAD ERROR";
+            // this is how to create an error panel prompt
+            //GameControl.control.CustomErrorException = "BAD ERROR";
         }
 
         // Update is called once per frame
