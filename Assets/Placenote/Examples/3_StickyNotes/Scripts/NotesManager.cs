@@ -55,6 +55,11 @@ namespace StickyNotes
 
         private string newNoteID = "";
 
+        public GameObject SpatialNoteInputForm;
+
+        //public GameObject DebugPanel;
+        //public Text DebugText;
+
         [SerializeField] ARRaycastManager mRaycastManager;
 
         // Use this for initialization
@@ -213,6 +218,8 @@ namespace StickyNotes
             // var newNoteID = mCurrNote.GetInstanceID().ToString();
             // use this noteID
             newNoteID = Guid.NewGuid().ToString();
+            // fille state fill this new noteID, so that we can use it to tie together to two APIs
+            GameControl.control.CreateNewNote_NoteId = newNoteID;
 
             mCurrNoteInfo = new NoteInfo
             {
@@ -247,30 +254,31 @@ namespace StickyNotes
             // turn on form panel dialogue
 
             // use newNoteID global variable, make sure to clear it at the end, after editting and making the rest call
-
+            SpatialNoteInputForm.SetActive(true);
 
             // Activate input field
-            InputField input = mCurrNote.GetComponentInChildren<InputField>();
-            input.interactable = true;
-            input.ActivateInputField();
+            //InputField input = mCurrNote.GetComponentInChildren<InputField>();
+            //input.interactable = true;
+            //input.ActivateInputField();
 
             // ajc Todo
             // call OnNoteClosed from button click after entering all information into input field
             // pass in all the note data, not the input field
 
-            input.onEndEdit.AddListener(delegate { OnNoteClosed(input); });
+            // ajc call onNoteClosed when we finish filling in the form... in SpatialNotRestcall.cs
+            //input.onEndEdit.AddListener(delegate { OnNoteClosed(input); });
         }
 
         // don't just pass in the inputField, pass in more data.
-        private void OnNoteClosed(InputField input)
+        public void OnNoteClosed(string noteTitle)
         {
             Debug.Log("No longer editing current note!");
 
             // Save input text, and set input field as non interactable
-            mCurrNoteInfo.note = input.text;
-            mCurrNoteInfo.comment =input.text;
-            input.DeactivateInputField();
-            input.interactable = false;
+            mCurrNoteInfo.note = noteTitle;
+            mCurrNoteInfo.comment = noteTitle;
+            //input.DeactivateInputField();
+            //input.interactable = false;
 
             //TurnOffButtons();
 

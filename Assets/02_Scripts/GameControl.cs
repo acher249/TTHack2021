@@ -16,9 +16,11 @@ public class GameControl : MonoBehaviour
     [Header("Errors")]
     public string CustomErrorException = "";
     public string userName = "";
+    public string CreateNewNote_NoteId = "";
 
-    public string CurrentMapName;
+    public string CurrentMapName = "";
     public SpatialNoteRoot AllNoteDataForThisMap;
+
 
     // SINGLETON PATTERN FOR DDOL
     void Awake()
