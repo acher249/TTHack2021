@@ -23,6 +23,7 @@ namespace spatialNotes
     {
         public string _id;
         public string noteId;
+        public string noteTitle;
         public string mapId;
         public string authorId;
         public string nodeType;
