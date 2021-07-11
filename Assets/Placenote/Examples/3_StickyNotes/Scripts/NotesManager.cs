@@ -93,67 +93,72 @@ namespace StickyNotes
         // Update checks for hit test
         void Update()
         {
-            // For hit testing on the device.
-            if (Input.touchCount > 0)
+            // ajc - make sure you are not instantiating other while the form is open
+            if (!SpatialNoteInputForm.activeInHierarchy)
             {
-                var touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Ended)
+                // For hit testing on the device.
+                if (Input.touchCount > 0)
                 {
-                    if (EventSystem.current.currentSelectedGameObject == null)
+                    var touch = Input.GetTouch(0);
+
+                    if (touch.phase == TouchPhase.Ended)
                     {
-                        Debug.Log("Not touching a UI button, moving on.");
-
-                        // Test if you are hitting an existing marker
-                        RaycastHit hit = new RaycastHit();
-                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
-
-                        if (Physics.Raycast(ray, out hit))
+                        if (EventSystem.current.currentSelectedGameObject == null)
                         {
-                            Debug.Log("Selected an existing note.");
+                            Debug.Log("Not touching a UI button, moving on.");
 
-                            GameObject note = hit.transform.gameObject;
+                            // Test if you are hitting an existing marker
+                            RaycastHit hit = new RaycastHit();
+                            Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
-                            // If the previous note was deleted, switch
-                            if (!mCurrNote)
+                            if (Physics.Raycast(ray, out hit))
                             {
-                                mCurrNote = note;
-                                TurnOnButtons();
-                            }
-                            else if (note.GetComponent<NoteController>().mIndex != mCurrNote.GetComponent<NoteController>().mIndex)
-                            {
-                                // New note selected is not the current note. Disable the buttons of the current note.
-                                TurnOffButtons();
+                                Debug.Log("Selected an existing note.");
 
-                                mCurrNote = note;
+                                GameObject note = hit.transform.gameObject;
 
-                                // Turn on buttons for the new selected note.
-                                TurnOnButtons();
+                                // If the previous note was deleted, switch
+                                if (!mCurrNote)
+                                {
+                                    mCurrNote = note;
+                                    TurnOnButtons();
+                                }
+                                else if (note.GetComponent<NoteController>().mIndex != mCurrNote.GetComponent<NoteController>().mIndex)
+                                {
+                                    // New note selected is not the current note. Disable the buttons of the current note.
+                                    TurnOffButtons();
 
+                                    mCurrNote = note;
+
+                                    // Turn on buttons for the new selected note.
+                                    TurnOnButtons();
+
+                                }
+                                else
+                                {
+                                    // Selected note is already the current note, just toggle buttons.
+                                    ToggleButtons();
+                                }
                             }
                             else
                             {
-                                // Selected note is already the current note, just toggle buttons.
-                                ToggleButtons();
+                                Debug.Log("Creating new note.");
+
+
+
+                                // prioritize reults types
+                                TrackableType resultType = TrackableType.FeaturePoint;
+                                if (HitTestWithResultType(touch.position, resultType))
+                                {
+                                    Debug.Log("Found a hit test result");
+                                }
+
                             }
-                        }
-                        else
-                        {
-                            Debug.Log("Creating new note.");
-
-
-
-                            // prioritize reults types
-                            TrackableType resultType = TrackableType.FeaturePoint;
-                            if (HitTestWithResultType(touch.position, resultType))
-                            {
-                                Debug.Log("Found a hit test result");
-                            }
-
                         }
                     }
                 }
             }
+
         }
 
 

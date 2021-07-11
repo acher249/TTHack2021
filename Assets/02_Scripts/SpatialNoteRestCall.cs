@@ -180,11 +180,20 @@ namespace spatialNotes
                     noteDataHolder.maintainceFrequency = SpatialNote.maintainceFrequency;
                     noteDataHolder.notes = SpatialNote.notes;
 
+                    // send to front end of note
+                    noteDataHolder.titleText.text = SpatialNote.noteTitle;
+                    noteDataHolder.authorText.text = SpatialNote.authorId;
+                    noteDataHolder.NoteTypeText.text = SpatialNote.nodeType;
+                    noteDataHolder.IdentifierText.text = SpatialNote.identifier;
+                    noteDataHolder.FrequencyText.text = SpatialNote.maintainceFrequency;
+                    noteDataHolder.NotesText.text = SpatialNote.notes;
+
                     // now send this note off through sticky notes
                     notesMgr.OnNoteClosed(SpatialNote.noteTitle);
 
                     // close ui dialogue
                     SpatialNoteInputForm.SetActive(false);
+
 
                 }));
 
@@ -220,6 +229,10 @@ namespace spatialNotes
 
             Debug.Log("postData: ");
             Debug.Log(postData);
+
+            // debug
+            DebugPanel.SetActive(true);
+            DebugPanelText.text =  "CREATING NOTE: " + postData;
 
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {

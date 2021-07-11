@@ -46,7 +46,8 @@ namespace StickyNotes
         private bool mapQualityThresholdCrossed = false;
         private float minMapSize = 200;
 
-
+        public GameObject DebugPanel;
+        public Text DebugPanelText;
 
         private bool mPlacenoteInit = false;
         private bool mLoadedOnce = false;
@@ -237,6 +238,8 @@ namespace StickyNotes
             mSelectedMapInfo = mapInfo;
             mMapSelectedPanel.SetActive(true);
 
+
+
         }
 
         public void OnLoadMapClick()
@@ -251,6 +254,10 @@ namespace StickyNotes
             // ajc we have a map ID... use this for API
 
             mLabelText.text = "Loading Map ID: " + mSelectedMapId;
+
+            // ajc - see what the mapid is
+            //DebugPanel.SetActive(true);
+            //DebugPanelText.text = "mSelectedMapId: " + mSelectedMapId;
 
             LibPlacenote.Instance.LoadMap(mSelectedMapId, (completed, faulted, percentage) =>
             {
@@ -272,8 +279,11 @@ namespace StickyNotes
                     //mLabelText.text = "Loaded Map. Trying to localize";
 
                     // ajc we have the map name, make rest call to go get notes via map name
-                    spatialNoteRestcall.GetAllNotesViaMapName(mSelectedMapId);
-                    GameControl.control.CurrentMapName = mSelectedMapId;
+                    spatialNoteRestcall.GetAllNotesViaMapName(mSelectedMapInfo.metadata.name);
+                    GameControl.control.CurrentMapName = mSelectedMapInfo.metadata.name;
+
+                    DebugPanel.SetActive(true);
+                    DebugPanelText.text = "current map name, to be used in create note rest call: " + mSelectedMapInfo.metadata.name;
 
                 }
                 else if (faulted)
@@ -416,6 +426,10 @@ namespace StickyNotes
 
                 // ajc here is mapId on creation
                 mSaveMapId = mapId;
+
+                // need to know what the map name is
+                //DebugPanel.SetActive(true);
+                //DebugPanelText.ttext = "mapId: " + mapId;
 
                 mMappingPanel.SetActive(false);
 

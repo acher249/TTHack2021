@@ -1732,7 +1732,11 @@ public class LibPlacenote : MonoBehaviour
 
             if (mapId == mapList[i].placeId)
             {
+                // is simMap the map object itself?
                 simMap = mapList[i];
+                var foundMapName = simMap.metadata.name;
+                GameControl.control.CurrentMapName = foundMapName;
+
                 foundMap = true;
             }
         }
