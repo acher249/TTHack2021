@@ -2768,7 +2768,7 @@ MonoBehaviour:
   mLabelText: {fileID: 9916904}
   MapName_InputField: {fileID: 1789703892869095660}
   saveButtonProgressBar: {fileID: 1692253393}
-  MapNameInputPanel: {fileID: 0}
+  MapNameInputPanel: {fileID: 1789703893476318619}
 --- !u!1 &1324831883
 GameObject:
   m_ObjectHideFlags: 0

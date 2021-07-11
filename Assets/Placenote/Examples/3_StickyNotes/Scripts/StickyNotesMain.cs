@@ -243,6 +243,7 @@ namespace StickyNotes
                 return;
             }
 
+            // ajc we have a map ID... use this for API
 
             mLabelText.text = "Loading Map ID: " + mSelectedMapId;
 
@@ -403,6 +404,8 @@ namespace StickyNotes
                 LibPlacenote.Instance.StopSession();
                 FeaturesVisualizer.ClearPointcloud();
 
+
+                // ajc here is mapId on creation
                 mSaveMapId = mapId;
 
                 mMappingPanel.SetActive(false);
