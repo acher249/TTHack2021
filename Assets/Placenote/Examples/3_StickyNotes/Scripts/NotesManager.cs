@@ -292,6 +292,10 @@ namespace StickyNotes
             }
         }
 
+
+        // ajc this is where the notes are getting instantiated in when loaded into a map.
+        // lets grab this moment and get all of the loaded in noteIDs, to use for our rest calls
+
         public GameObject NoteFromInfo(NoteInfo info)
         {
             GameObject note = Instantiate(mNotePrefab);
@@ -299,6 +303,9 @@ namespace StickyNotes
             note.transform.rotation = new Quaternion(info.qx, info.qy, info.qz, info.qw);
             note.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
             note.SetActive(true);
+
+            // ajc send our custom noteID to the front end to test.
+            note.transform.GetChild(3).GetComponent<Text>().text = info.noteID;
 
             // add listeners to the buttons
             note.GetComponent<NoteController>().mEditButton.onClick.AddListener(OnEditButtonClick);
@@ -375,6 +382,7 @@ namespace StickyNotes
             return JObject.FromObject(notesList);
         }
 
+        // ajc - load notes from json...
         public void LoadNotesJSON(JToken mapMetadata)
         {
             ClearNotes();
@@ -397,6 +405,7 @@ namespace StickyNotes
                     mNotesObjList.Add(note);
                     mNotesInfoList.Add(noteInfo);
                 }
+
             }
         }
     }

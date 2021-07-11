@@ -1728,6 +1728,8 @@ public class LibPlacenote : MonoBehaviour
         MapInfo[] mapList = JsonConvert.DeserializeObject<MapInfo[]>(mapData);
         for (int i = 0; i < mapList.Length; i++)
         {
+            // ajc - got all of the mapData
+
             if (mapId == mapList[i].placeId)
             {
                 simMap = mapList[i];

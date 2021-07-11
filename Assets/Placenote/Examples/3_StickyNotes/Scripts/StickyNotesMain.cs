@@ -262,6 +262,8 @@ namespace StickyNotes
                     // Disable pointcloud
                     FeaturesVisualizer.DisablePointcloud();
 
+
+                    // ajc - start session is where all the notes get instantiates
                     LibPlacenote.Instance.StartSession();
 
                     //mLabelText.text = "Loaded Map. Trying to localize";
