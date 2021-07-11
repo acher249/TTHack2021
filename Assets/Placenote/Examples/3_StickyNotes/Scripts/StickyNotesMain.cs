@@ -259,6 +259,14 @@ namespace StickyNotes
             //DebugPanel.SetActive(true);
             //DebugPanelText.text = "mSelectedMapId: " + mSelectedMapId;
 
+            // ajc we have the map name, make rest call to go get notes via map name
+            spatialNoteRestcall.GetAllNotesViaMapName(mSelectedMapInfo.metadata.name);
+            GameControl.control.CurrentMapName = mSelectedMapInfo.metadata.name;
+
+            DebugPanel.SetActive(true);
+            DebugPanelText.text += "current map name, to be used in create note rest call: " + mSelectedMapInfo.metadata.name;
+
+
             LibPlacenote.Instance.LoadMap(mSelectedMapId, (completed, faulted, percentage) =>
             {
                 if (completed)
@@ -277,13 +285,6 @@ namespace StickyNotes
                     LibPlacenote.Instance.StartSession();
 
                     //mLabelText.text = "Loaded Map. Trying to localize";
-
-                    // ajc we have the map name, make rest call to go get notes via map name
-                    spatialNoteRestcall.GetAllNotesViaMapName(mSelectedMapInfo.metadata.name);
-                    GameControl.control.CurrentMapName = mSelectedMapInfo.metadata.name;
-
-                    DebugPanel.SetActive(true);
-                    DebugPanelText.text = "current map name, to be used in create note rest call: " + mSelectedMapInfo.metadata.name;
 
                 }
                 else if (faulted)
@@ -326,6 +327,9 @@ namespace StickyNotes
             // Adam Make sure that they input a map name
             if (MapName_InputField.text.Length > 3)
             {
+                // set game control with new map name
+                GameControl.control.CurrentMapName = MapName_InputField.text;
+
                 if (!LibPlacenote.Instance.Initialized())
                 {
                     Debug.Log("SDK not yet initialized");
@@ -435,7 +439,7 @@ namespace StickyNotes
 
                 LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
 
-                metadata.name = "Note: " + MapName_InputField.text;
+                metadata.name = MapName_InputField.text;
 
                 mLabelText.text = "Saved Map Name: " + metadata.name;
 

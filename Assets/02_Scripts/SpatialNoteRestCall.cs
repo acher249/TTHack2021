@@ -32,6 +32,8 @@ namespace spatialNotes
 
         public void Start()
         {
+            DebugPanelText.text = "";
+
             // test calls here
 
             //GetAllNotesViaMapName("myMap");
@@ -216,7 +218,6 @@ namespace spatialNotes
             {
                 ""noteId"": """ + noteId + @""",
                 ""noteTitle"": """ + noteTitle + @""",
-                ""noteTitle"": "" Note Data "",
                 ""mapId"": """ + mapId + @""",
                 ""authorId"": """ + authorId + @""",
                 ""nodeType"": """ + nodeType + @""",
@@ -232,7 +233,7 @@ namespace spatialNotes
 
             // debug
             DebugPanel.SetActive(true);
-            DebugPanelText.text =  "CREATING NOTE: " + postData;
+            DebugPanelText.text +=  "CREATING NOTE: " + postData;
 
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
             {
