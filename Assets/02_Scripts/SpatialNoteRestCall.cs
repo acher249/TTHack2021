@@ -23,7 +23,7 @@ namespace spatialNotes
         public InputField nodeType_Inputfield;
         public InputField identifier_Inputfield;
         //public InputField lastMaintained_Inputfield;
-        public InputField maintainceFrequency_Inputfield; // switch this to a dropdown
+        public Text maintainceFrequency_DropdownLabel; // switch this to a dropdown
         public InputField notes_Inputfield;
 
         public NotesManager notesMgr;
@@ -135,8 +135,10 @@ namespace spatialNotes
             var noteTitle1 = noteTitle_Inputfield.text;
             var nodeType1 = nodeType_Inputfield.text;
             var identifier1 = identifier_Inputfield.text;
-            var maintainceFrequency1 = maintainceFrequency_Inputfield.text;
+            var maintainceFrequency1 = maintainceFrequency_DropdownLabel.text;
+
             var notes1 = notes_Inputfield.text;
+
 
             StartCoroutine(SequenceStart(noteId1, noteTitle1, mapId1, authorId1, nodeType1,
                     identifier1, lastMaintained1, maintainceFrequency1, notes1));
