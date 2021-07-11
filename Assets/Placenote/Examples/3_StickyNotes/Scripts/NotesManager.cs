@@ -307,19 +307,22 @@ namespace StickyNotes
             // ajc send our custom noteID to the front end to test.
             note.transform.GetChild(3).GetComponent<Text>().text = info.noteID;
 
+
             // need to go and reference the json object returned of all the notes,
             // and then push that data into the note itself.
             // now dont just add the text, add it to an object on the note
-            note.GetComponent<NoteDataHolder>()._id = "";
+            //note.GetComponent<NoteDataHolder>()._id = "";
             note.GetComponent<NoteDataHolder>().noteId = info.noteID;
-            note.GetComponent<NoteDataHolder>().noteTitle = "";
-            note.GetComponent<NoteDataHolder>().mapId = "";
-            note.GetComponent<NoteDataHolder>().authorId = "";
-            note.GetComponent<NoteDataHolder>().nodeType = "";
-            note.GetComponent<NoteDataHolder>().identifier = "";
-            note.GetComponent<NoteDataHolder>().lastMaintained = "";
-            note.GetComponent<NoteDataHolder>().dateCreated = "";
-            note.GetComponent<NoteDataHolder>().notes = "";
+            //note.GetComponent<NoteDataHolder>().noteTitle = "";
+            //note.GetComponent<NoteDataHolder>().noteData = "";
+            //note.GetComponent<NoteDataHolder>().mapId = "";
+            //note.GetComponent<NoteDataHolder>().authorId = "";
+            //note.GetComponent<NoteDataHolder>().nodeType = "";
+            //note.GetComponent<NoteDataHolder>().identifier = "";
+            //note.GetComponent<NoteDataHolder>().lastMaintained = "";
+            //note.GetComponent<NoteDataHolder>().maintainceFrequency = "";
+            //note.GetComponent<NoteDataHolder>().dateCreated = "";
+            //note.GetComponent<NoteDataHolder>().notes = "";
 
 
             // add listeners to the buttons

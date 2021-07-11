@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using spatialNotes;
 
 //hello Sticky Notes how are you?
 // good how are you
@@ -29,6 +30,10 @@ namespace StickyNotes
         [SerializeField] Text mLabelText;
 
         public InputField MapName_InputField;
+
+
+        // need reference to the rest call
+        public SpatialNoteRestCall spatialNoteRestcall;
 
 
         [SerializeField] Image saveButtonProgressBar;
@@ -262,11 +267,13 @@ namespace StickyNotes
                     // Disable pointcloud
                     FeaturesVisualizer.DisablePointcloud();
 
-
-                    // ajc - start session is where all the notes get instantiates
                     LibPlacenote.Instance.StartSession();
 
                     //mLabelText.text = "Loaded Map. Trying to localize";
+
+                    // ajc we have the map name, make rest call to go get notes via map name
+                    spatialNoteRestcall.GetAllNotesViaMapName(mSelectedMapId);
+                    GameControl.control.CurrentMapName = mSelectedMapId;
 
                 }
                 else if (faulted)

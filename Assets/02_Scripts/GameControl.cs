@@ -7,7 +7,7 @@ using System.IO;
 // this is for writing out binary files
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
-
+using spatialNotes;
 
 public class GameControl : MonoBehaviour
 {
@@ -16,6 +16,9 @@ public class GameControl : MonoBehaviour
     [Header("Errors")]
     public string CustomErrorException = "";
     public string userName = "";
+
+    public string CurrentMapName;
+    public SpatialNoteRoot AllNoteDataForThisMap;
 
     // SINGLETON PATTERN FOR DDOL
     void Awake()

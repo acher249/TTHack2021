@@ -2187,6 +2187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab47530d89c704f8eada32275f3c3885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugPanel: {fileID: 4088018133824819719}
+  DebugPanelText: {fileID: 4088018132672766550}
 --- !u!4 &1149735600
 Transform:
   m_ObjectHideFlags: 0
@@ -2645,6 +2647,7 @@ MonoBehaviour:
   mToggleGroup: {fileID: 2042523429}
   mLabelText: {fileID: 9916904}
   MapName_InputField: {fileID: 1789703892869095660}
+  spatialNoteRestcall: {fileID: 0}
   saveButtonProgressBar: {fileID: 1692253393}
   MapNameInputPanel: {fileID: 1789703893476318619}
 --- !u!1 &1324831883
@@ -10687,7 +10690,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sign in
+  m_Text: 
 --- !u!222 &4088018132672766551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13765,39 +13768,6 @@ MonoBehaviour:
       - m_Target: {fileID: 4088018133824819719}
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: Vibrate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4088018132403359023}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: OnExitButtonClick
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

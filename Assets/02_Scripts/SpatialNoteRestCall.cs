@@ -11,36 +11,49 @@ namespace spatialNotes
 {
     public class SpatialNoteRestCall : MonoBehaviour
     {
+        public GameObject DebugPanel;
+        public Text DebugPanelText;
 
         public void Start()
         {
+            // test calls here
 
-            StartCoroutine(SequenceStart());
+            //GetAllNotesViaMapName("myMap");
+        }
+
+        public void GetAllNotesViaMapName(string mapName)
+        {
+
+            StartCoroutine(SequenceStart(mapName));
 
             //chain coroutines so that they execute sequentially
-            IEnumerator SequenceStart()
+            IEnumerator SequenceStart(string nameOfMap)
             {
                 Debug.Log("Start Sequence to get note data: ");
 
                 //Checking for DEBUG mode
                 // Now SHoPUtility has callback as a parameter to basically return the records from the REST call for async operations 
-                string URL = "https://ar-points.herokuapp.com/api/note/get-my-notes";
-                yield return StartCoroutine(GetRequest_SpatialNoteUtility(URL, (SpatialNoteRoot) =>
+                string URL = "https://ar-points.herokuapp.com/api/note/get-map-notes";
+                yield return StartCoroutine(GetRequest_GetAllNotesViaMapName(nameOfMap, URL, (SpatialNoteRoot) =>
                 {
-                    Debug.Log("notes object returned: ");
-                    Debug.Log(SpatialNoteRoot);
+                    Debug.Log("notes returned: ");
                     LogObjectToConsole(SpatialNoteRoot);
 
-                    //for (var i = 0; i < SpatialNoteRoot.Notes.Length; i++)
-                    //{
-                    //    Debug.Log(SpatialNoteRoot.Notes[i].noteId);
-                    //    Debug.Log(SpatialNoteRoot.Notes[i].mapId);
+                    GameControl.control.AllNoteDataForThisMap = SpatialNoteRoot;
 
-                    //}
+                    //display the data to a debug, to make sure that the data is coming in..
+                    DebugPanel.SetActive(true);
+
+                    for (var i = 0; i < SpatialNoteRoot.Notes.Length; i++)
+                    {
+                        //Debug.Log(SpatialNoteRoot.Notes[i].noteId);
+                        //Debug.Log(SpatialNoteRoot.Notes[i].mapId);
+                        DebugPanelText.text += SpatialNoteRoot.Notes[i].noteId;
+                        DebugPanelText.text += SpatialNoteRoot.Notes[i].mapId;
+                        DebugPanelText.text += SpatialNoteRoot.Notes[i].noteTitle;
+                    }
 
                     // now do things with data
-
-
 
                 }));
 
@@ -48,14 +61,13 @@ namespace spatialNotes
             }
         }
 
-        IEnumerator GetRequest_SpatialNoteUtility(string uri, System.Action<SpatialNoteRoot> callback)
+        IEnumerator GetRequest_GetAllNotesViaMapName(string mapName, string uri, System.Action<SpatialNoteRoot> callback)
         {
 
            // pass these arguments
             string postData = @"
             {
-                ""mapId"": ""myMap"",
-              ""authorId"": ""elcin""
+                ""mapId"": """ + mapName + @"""
             }";
 
             using (UnityWebRequest webRequest = UnityWebRequest.Post(uri, postData))
