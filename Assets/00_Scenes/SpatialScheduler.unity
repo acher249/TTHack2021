@@ -4702,6 +4702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugPanel: {fileID: 4088018133824819719}
   DebugPanelText: {fileID: 4088018132672766550}
+  SpatialNoteInputForm: {fileID: 1869502658}
   noteTitle_Inputfield: {fileID: 409752774}
   nodeType_Inputfield: {fileID: 241920557}
   identifier_Inputfield: {fileID: 917431424}
@@ -5402,7 +5403,8 @@ MonoBehaviour:
   mNotesObjList: []
   mNotePrefab: {fileID: 1654472876317410, guid: 664cee0938e0f40b9a7e8d00ba56f422,
     type: 3}
-  SpatialNoteInputForm: {fileID: 0}
+  mCurrNote: {fileID: 0}
+  SpatialNoteInputForm: {fileID: 1869502658}
   mRaycastManager: {fileID: 1858727147}
 --- !u!114 &1304640293
 MonoBehaviour:

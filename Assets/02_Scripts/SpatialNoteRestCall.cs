@@ -15,6 +15,8 @@ namespace spatialNotes
         public GameObject DebugPanel;
         public Text DebugPanelText;
 
+        public GameObject SpatialNoteInputForm;
+
         // spatial note input fields
         public InputField noteTitle_Inputfield;
         //public InputField noteData_Inputfield;
@@ -164,17 +166,25 @@ namespace spatialNotes
                     Debug.Log("WE SAVED A NOTE:");
                     LogObjectToConsole(SpatialNote);
 
-                    //Debug.Log("Created Note: " + SpatialNote.noteTitle);
-                    //Debug.Log("Created Note: " + SpatialNote.mapId);
-                    //Debug.Log("Created Note: " + SpatialNote.lastMaintained);
-                    //Debug.Log("Created Note: " + SpatialNote.maintainceFrequency);
-                    //Debug.Log("Created Note: " + SpatialNote.noteId);
-                    //Debug.Log("Created Note: " + SpatialNote.notes);
+                    // Now push all of this data to the note on the scene
+                    var currentNote = notesMgr.mCurrNote;
+                    var noteDataHolder = currentNote.GetComponent<NoteDataHolder>();
 
-                    // now do things with data
+                    noteDataHolder.noteId = SpatialNote.noteId;
+                    noteDataHolder.noteTitle = SpatialNote.noteTitle;
+                    noteDataHolder.mapId = SpatialNote.mapId;
+                    noteDataHolder.authorId = SpatialNote.authorId;
+                    noteDataHolder.nodeType = SpatialNote.nodeType;
+                    noteDataHolder.identifier = SpatialNote.identifier;
+                    noteDataHolder.lastMaintained = SpatialNote.lastMaintained;
+                    noteDataHolder.maintainceFrequency = SpatialNote.maintainceFrequency;
+                    noteDataHolder.notes = SpatialNote.notes;
 
                     // now send this note off through sticky notes
-                    //notesMgr.OnNoteClosed(SpatialNote.noteTitle);
+                    notesMgr.OnNoteClosed(SpatialNote.noteTitle);
+
+                    // close ui dialogue
+                    SpatialNoteInputForm.SetActive(false);
 
                 }));
 

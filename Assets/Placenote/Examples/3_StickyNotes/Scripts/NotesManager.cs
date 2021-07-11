@@ -50,7 +50,8 @@ namespace StickyNotes
         // Prefab for the Note
         public GameObject mNotePrefab;
 
-        private GameObject mCurrNote;
+        // ajc - this is the current note
+        public GameObject mCurrNote;
         private NoteInfo mCurrNoteInfo;
 
         private string newNoteID = "";
@@ -431,6 +432,11 @@ namespace StickyNotes
                     mNotesObjList.Add(note);
                     mNotesInfoList.Add(noteInfo);
                 }
+
+                // AJC - Now that all of the notes have been instantiated
+                // we need to go and give all of those notes their data from gamecontrol
+
+                // create a function here to do that
 
             }
         }
